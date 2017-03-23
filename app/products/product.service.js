@@ -15,6 +15,7 @@ var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/do");
 require("rxjs/add/operator/catch");
+require("rxjs/add/observable/throw");
 var ProductService = (function () {
     function ProductService(_http) {
         this._http = _http;

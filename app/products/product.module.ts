@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ProductListComponent } from './product-list.component';
-import { ProductDetailsComponent} from './product-detail.component';
+import { ProductDetailComponent} from './product-detail.component';
+import { ProductDetailGuard } from './product-guard.service';
+
 import { ProductFilterPipe} from './product-filter.pipe';
 import { ProductService} from './product.service';
-import { ProductDetailGuard } from './product-guard.service';
+
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
         ProductListComponent,
-        ProductDetailsComponent,
+        ProductDetailComponent,
         ProductFilterPipe,
     ],
     imports: [
@@ -20,8 +22,7 @@ import { SharedModule } from '../shared/shared.module';
             { path: 'products', component: ProductListComponent },
             { path: 'product/:id', 
                 canActivate: [ ProductDetailGuard ], 
-                component: ProductDetailsComponent },
-
+                component: ProductDetailComponent },
         ])
     ],
     providers: [

@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { Subscription } from 'rxjs/Subscription';
+
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'product-detail.component.html'
+    templateUrl: 'product-detail.component.html',
 })
 
-export class ProductDetailsComponent implements OnInit{
+export class ProductDetailComponent implements OnInit{
     pageTitle: string = 'Product Details';
     product: IProduct;
     errorMessage: string;
@@ -22,10 +24,11 @@ export class ProductDetailsComponent implements OnInit{
     }
 
     ngOnInit(): void {
-            this.sub = this._route.params.subscribe(
-                params => {
-                    let id = +this._route.snapshot.params['id'];
-                    this.pageTitle += `: ${id}`;
+        this.sub = this._route.params.subscribe(
+            params => {
+                let id = +params['id'];
+                this.getProduct(id);
+                this.pageTitle += `: ${id}`;
                 }
             )
     }
@@ -33,4 +36,11 @@ export class ProductDetailsComponent implements OnInit{
     onBack(): void {
         this._router.navigate(['/products']);
     }
+
+    getProduct(id: number) {
+        this._productService.getProduct(id).subscribe(
+            product => this.product = product,
+            error => this.errorMessage = <any>error);
+    
+
 }
